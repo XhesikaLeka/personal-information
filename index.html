@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css"/>
+    <script>
+        function validateForm() {
+            var x = document.getElementById("pNumber").value;
+            var nr = 0;
+            var n1=x.charCodeAt(0);
+            var n2=x.charCodeAt(x.length-1);
+            if (((n1 >= 65 && n1 < 91) || (n1 >= 97 && n1 < 123))&&(n2 >= 65 && n2 < 91) || (n2 >= 97 && n2 < 123)) {
+
+                for (var i = 1; i < x.length - 1; i++) {
+                    if (Number.isInteger(parseInt(x.charAt(i))))
+                        nr++;
+                }
+                if (nr == 8) {
+                    //alert("Numri personal  eshte ne formatin e duhur");
+                    return true;
+                }
+
+            }
+           //alert("Numri personal nuk eshte ne formatin e duhur");
+            return false;
+
+        }
+    </script>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function postData() {
+            var name = $('#name').val();
+            var surname = $('#surname').val();
+            var dep = $('#dep').val();
+            var sname = $('#sname').val();
+            var natid = $('#nat_id').val();
+            var gjinia = $('#gjinia').val();
+            var city = $('#city').val();
+            var nation = $('#nation').val();
+            var job = $('#job').val();
+            var civil = $('#civil').val();
+            var data = {
+                name: name,
+                surname: surname,
+                dep: dep,
+                sname: sname,
+                natid: natid,
+                gjinia: gjinia,
+                city: city,
+                nation: nation,
+                job: job,
+                civil: civil
+            }
+  
+
+			$.ajax({
+			    type: "POST",
+			    url: "insert.php",
+                dataType: "json",
+                
+			    data: data
+			 });
+		}
+
+</script>
+</head>
+
+<body>
+    <div class="form-style-8">
+        
+  <h2>Insert your personal information</h2>
+    <form method="POST" action="" id="form" autocomplete="off">
+        Name:
+        <input type="text" id="name" name="name">
+        <br>
+        Surname:
+        <input type="text" id="surname" name="surname">
+        <br>
+        Department:
+        <input type="text" id="dep" name="dep">
+        <br>
+        Supervisor's ID:
+        <input type="text" id="sname" name="sname">
+        <br>
+        National ID:
+        <input type="text" name="nat_id" id="nat_id"> <br>
+        Gender:
+        <input type="text" name="gjinia" id="gjinia" >
+        <br>
+        City:
+        <input type="text" name="city" id="city"> <br>
+	    Nation:
+        <input type="text" name="nation" id="nation"> <br>
+        Job position:
+        <input type="text" name="job" id="job"> <br>
+        Civil status:
+        <input type="text" id="civil" name="civil">
+        <br>
+        <input type="submit" name="submit" onclick="postData()">
+    </form>
+    </div>
+</body>
+
+
+</html>
